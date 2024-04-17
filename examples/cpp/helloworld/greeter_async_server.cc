@@ -151,9 +151,13 @@ class ServerImpl final {
   void HandleRpcs() {
     // Spawn a new CallData instance to serve new clients.
     new CallData(&service_, cq_.get());
+    std::cout << "new connected: " << cq_.get() << std::endl;
+
     void* tag;  // uniquely identifies a request.
     bool ok;
     while (true) {
+      std::cout << "new client connected: " << cq_.get() << std::endl;
+
       // Block waiting to read the next event from the completion queue. The
       // event is uniquely identified by its tag, which in this case is the
       // memory address of a CallData instance.
